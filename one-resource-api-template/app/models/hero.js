@@ -16,7 +16,7 @@ const heroSchema = new mongoose.Schema(
 			// to make a sub doc for this or not...?
 			// make virtuals to explain each class
 			type: String,
-			// don't know how to make only one option of a sub doc yet, so take up real-estate here
+			// don't know how to make only one option of a sub doc yet, so take up real-estate and squat here
 			enum: ['Warrior', 'Ranged Dealer', 'Support', 'Tanker'],
 			default: 'Warrior',
 			required: true,
@@ -36,6 +36,7 @@ const heroSchema = new mongoose.Schema(
 
 // virtuals go here
 
+// include element triangles
 heroSchema.virtual('elementTriangle').get(function () {
     if (this.element === 'Fire') {
 		return `${this.name} is strong against Earth attributes, but weak against Water attributes.`
@@ -54,6 +55,7 @@ heroSchema.virtual('elementTriangle').get(function () {
 	}
 })
 
+// class descriptions 
 heroSchema.virtual('classDescription').get(function () {
     if (this.class === 'Warrior') {
         return "Class well balanced and usable in many ways. Equips melee weapons."
