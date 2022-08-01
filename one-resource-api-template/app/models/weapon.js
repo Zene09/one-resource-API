@@ -4,7 +4,7 @@
 const mongoose = require('mongoose')
 
 const weaponSchema = new mongoose.Schema({
-    weapon: {
+    name: {
         type: String,
         required: true
     },
@@ -13,11 +13,14 @@ const weaponSchema = new mongoose.Schema({
     },
     element: {
         type: String,
-        required: true
+        enum: ['Fire', 'Water', 'Earth', 'Dark', 'Light', 'Basic'],
+        default: 'Basic',
+        required: true,
     },
     requirements: {
         type: String,
         enum: ['Warrior', 'Ranged Dealer', 'Support', 'Tanker'],
+        default: 'Warrior',
         required: true
     }
 }, {
@@ -29,7 +32,7 @@ const weaponSchema = new mongoose.Schema({
 // weapon virtuals here
 // give description that this weapon should go to a specific class
 weaponSchema.virtual('classRequirements').get(function () {
-    return `${this.weapon} should be equipped by a ${this.requirements} to be most effective.`
+    return `${this.name} should be equipped by a ${this.requirements} to be most effective.`
 })
 
 module.exports = weaponSchema

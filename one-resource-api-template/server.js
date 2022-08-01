@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 
 // require route files
+const weaponRoutes = require('./app/routes/weapon_routes')
 const heroRoutes = require('./app/routes/hero_routes')
 const exampleRoutes = require('./app/routes/example_routes')
 const userRoutes = require('./app/routes/user_routes')
@@ -66,6 +67,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(requestLogger)
 
 // register route files
+app.use(weaponRoutes)
 app.use(heroRoutes)
 app.use(exampleRoutes)
 app.use(userRoutes)

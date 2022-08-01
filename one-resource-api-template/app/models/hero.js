@@ -3,8 +3,6 @@ const mongoose = require('mongoose')
 // import weapon sub doc
 const weaponSchema = require('./weapon')
 
-const { Schema, model } = mongoose
-
 const heroSchema = new mongoose.Schema(
 	{
 		name: {
@@ -26,7 +24,7 @@ const heroSchema = new mongoose.Schema(
 			default: 'Warrior',
 			required: true,
 		},
-		weapon: [weaponSchema],
+		weapons: [weaponSchema],
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',

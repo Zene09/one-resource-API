@@ -15,9 +15,8 @@ const router = express.Router()
 
 // POST -> create weapon
 // POST /weapons/:heroId
-router.post('/weapons/:heroId', removeBlanks, (req, res, next) => {
+router.post('/weapons/:heroId', requireToken, removeBlanks, (req, res, next) => {
     const weapon = req.body.weapon
-    // get our hero's id from req.params.heroId
     const heroId = req.params.heroId
     // find the hero
     Hero.findById(heroId)
@@ -27,6 +26,8 @@ router.post('/weapons/:heroId', removeBlanks, (req, res, next) => {
             console.log('this is the weapon', weapon)
 
             // push into the hero's weapons array
+            // check ownership
+            requireOwnership(req, hero)
             hero.weapons.push(weapon)
 
             // save the hero
@@ -71,7 +72,7 @@ router.delete('/weapons/:heroId/:weaponId', requireToken, (req, res, next) => {
         // handle 404
         .then(handle404)
         .then(hero => {
-            const theWeapon = hero.weapon.id(weaponId)
+            const theWeapon = hero.weapons.id(weaponId)
             // require that the user deleting this weapon is the hero's owner
             requireOwnership(req, hero)
             // call remove on the subdoc
