@@ -9,12 +9,12 @@ const Hero = require('./hero')
 const db = require('../../config/db')
 
 const startHeroes = [
-    {name: 'Zen', element: 'Basic', class: 'Warrior'},
-    {name: 'Future Princess', element: 'Light', class: 'Tanker'},
-    {name: 'Dark Magician Beth', element: 'Dark', class: 'Warrior'},
-    {name: 'Nine-Tailed-Fox Garam', element: 'Water', class: 'Ranged Dealer'},
-    {name: 'Rue the Weredeer', element: 'Earth', class: 'Ranged Dealer'},
-    {name: 'Miya the Exorcist', element: 'Fire', class: 'Support'}
+    {name: 'Zen', stars: 2, element: 'Basic', class: 'Warrior'},
+    {name: 'Future Princess', stars: 5, element: 'Light', class: 'Tanker'},
+    {name: 'Dark Magician Beth', stars: 4, element: 'Dark', class: 'Warrior'},
+    {name: 'Nine-Tailed-Fox Garam', stars: 5, element: 'Water', class: 'Ranged Dealer'},
+    {name: 'Rue the Weredeer', stars: 4, element: 'Earth', class: 'Ranged Dealer'},
+    {name: 'Miya the Exorcist', stars: 5, element: 'Fire', class: 'Support'}
 ]
 
 // first we need to connect to the database

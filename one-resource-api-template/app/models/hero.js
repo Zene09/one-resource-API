@@ -9,6 +9,12 @@ const heroSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
+		stars: {
+			type: Number,
+			enum: [1, 2, 3, 4, 5],
+			default: 1,
+			required: true,
+		},
 		element: {
 			type: String,
 			enum: ['Fire', 'Water', 'Earth', 'Dark', 'Light', 'Basic'],
@@ -27,8 +33,7 @@ const heroSchema = new mongoose.Schema(
 		weapons: [weaponSchema],
 		owner: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User',
-			required: true,
+			ref: 'User'
 		},
 	},
 	{
@@ -39,6 +44,16 @@ const heroSchema = new mongoose.Schema(
 )
 
 // virtuals go here
+// stars description
+heroSchema.virtual('starGrade').get(function () {
+	if (this.stars <= 2) {
+		return `Only ${this.stars} stars? Psh, you have some work to do! Hop to it, newbie!`
+	} else if (this.stars >= 3 && this.stars < 5) {
+		return `${this.name}, not so much a newbie anymore, huh?`
+	} else {
+		return `${this.stars} stars means you have gone above and beyond, I'm proud of you, ${this.name}.`
+	}
+})
 
 // include element triangles
 heroSchema.virtual('elementTriangle').get(function () {
